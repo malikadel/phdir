@@ -1,3 +1,9 @@
+<?php 
+  session_start();
+  error_reporting(E_ALL);
+  error_reporting(-1);
+  ini_set('error_reporting', E_ALL);
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -49,58 +55,8 @@
 <!-- data-spy="scroll" data-target="#navbar-example" -->
 <body data-spy="scroll" data-target="#navbar-example">
 <!-- Preloader are 1st step towards professional design. -->
-  <div id="preloader"></div>
-  <header>
-    <!-- header-area start -->
-    <div id="sticker" class="header-area">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 col-sm-12">
 
-            <!-- Navigation -->
-            <nav class="navbar navbar-default">
-              <!-- Brand and toggle get grouped for better mobile display -->
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".bs-example-navbar-collapse-1" aria-expanded="false">
-										<span class="sr-only">Toggle navigation</span>
-										<span class="icon-bar"></span>
-										<span class="icon-bar"></span>
-										<span class="icon-bar"></span>
-									</button>
-                <!-- Brand -->
-                <a class="navbar-brand page-scroll sticky-logo" href="index.html">
-                  <h1><span>Ph</span>Dir</h1>
-                  <!-- Uncomment below if you prefer to use an image logo -->
-                  <!-- <img src="img/logo.png" alt="" title=""> -->
-								</a>
-              </div>
-              <!-- Collect the nav links, forms, and other content for toggling -->
-              <div class="collapse navbar-collapse main-menu bs-example-navbar-collapse-1" id="navbar-example">
-                <ul class="nav navbar-nav navbar-right">
-                  <li class="active">
-                    <a class="page-scroll" href="#home">Home</a>
-                  </li>
-                  <li>
-                    <a class="page-scroll" href="#about">Login</a>
-                  </li>
-                  <li>
-                    <a class="page-scroll" href="#services">SignUp</a>
-                  </li>
-                  <li>
-                    <a class="page-scroll" href="#team">Public Directory</a>
-                  </li>
-                </ul>
-              </div>
-              <!-- navbar-collapse -->
-            </nav>
-            <!-- END: Navigation -->
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- header-area end -->
-  </header>
-  <!-- header end -->
+<?php include("header.php"); ?>
 
   <!-- Start Slider Area -->
   <div id="home" class="slider-area">
@@ -188,8 +144,63 @@
     </div>
   </div>
   <!-- End Slider Area -->
+  <!-- Start Public Contact Area -->
+  <div id="contact" class="contact-area">
+    <div class="contact-inner area-padding">
+      <div class="contact-overly"></div>
+      <div class="container ">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="section-headline text-center">
+              <h2>Public Contacts</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Firstname</th>
+                  <th>Lastname</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>John</td>
+                  <td>Doe</td>
+                  <td>john@example.com</td>
+                </tr>
+                <tr>
+                  <td>Mary</td>
+                  <td>Moe</td>
+                  <td>mary@example.com</td>
+                </tr>
+                <tr>
+                  <td>July</td>
+                  <td>Dooley</td>
+                  <td>july@example.com</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Public Contact Area -->
 
-  <!-- Start About area -->
+
+
+<?php
+
+  if(isset($_SESSION['loggedIn']) and $_SESSION['loggedIn'] == true)
+  {}
+  else
+  {
+?>
+  <!-- Start Login Area -->
   <div id="about" class="about-area area-padding">
     <div class="container">
       <div class="row">
@@ -208,12 +219,12 @@
                 <h2>User Login</h2>
                 <p>Please enter your email and password</p>
               </div>
-              <form id="Login">
+              <form id="Login"  method="post" action="loginProcess.php">
                   <div class="form-group">
-                      <input type="email" class="form-control" id="inputEmail" placeholder="Email Address">
+                      <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email Address">
                   </div>
                   <div class="form-group">
-                      <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                      <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
                   </div>
                   <div class="forgot">
                     <a href="reset.html">Forgot password?</a>
@@ -223,11 +234,12 @@
             </div>
           </div>
         </div>
+
         <!-- single-well end-->
       </div>
     </div>
   </div>
-  <!-- End About area -->
+  <!-- End Login area -->
 
   <!-- Start Signup area -->
   <div id="services" class="services-area area-padding">
@@ -247,15 +259,15 @@
                 <h2>User Register</h2>
                 <p>Please enter your Name, Email and Password</p>
               </div>
-              <form id="Signup">
+              <form id="Signup" method="post" action="signupProcess.php">
                   <div class="form-group">
-                      <input type="text" class="form-control" id="signupName" placeholder="Name">
+                      <input type="text" class="form-control" id="signupName" name="name" placeholder="Name">
                   </div>
                   <div class="form-group">
-                      <input type="email" class="form-control" id="signupEmail" placeholder="Email Address">
+                      <input type="email" class="form-control" id="signupEmail" name="email" placeholder="Email Address">
                   </div>
                   <div class="form-group">
-                      <input type="password" class="form-control" id="signupPassword" placeholder="Password">
+                      <input type="password" class="form-control" id="signupPassword" name="password" placeholder="Password">
                   </div>
                   <button type="submit" class="btn btn-primary">Signup</button>
               </form>
@@ -269,157 +281,15 @@
 
 
 
-  <!-- Faq area start -->
-  <div class="faq-area area-padding">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="section-headline text-center">
-            <h2>Faq Question</h2>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-12">
-          <div class="faq-details">
-            <div class="panel-group" id="accordion">
-              <!-- Panel Default -->
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="check-title">
-											<a data-toggle="collapse" class="active" data-parent="#accordion" href="#check1">
-                                                <span class="acc-icons"></span>Fully adoptable phone directory with rich features in it.
-											</a>
-										</h4>
-                </div>
-                <div id="check1" class="panel-collapse collapse in">
-                  <div class="panel-body">
-                    <p>
-                      Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <!-- End Panel Default -->
-              <!-- Panel Default -->
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="check-title">
-											<a data-toggle="collapse" data-parent="#accordion" href="#check2">
-                                                <span class="acc-icons"></span> Fully adoptable phone directory with rich features in it.
-											</a>
-										</h4>
-                </div>
-                <div id="check2" class="panel-collapse collapse">
-                  <div class="panel-body">
-                    <p>
-                     Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <!-- End Panel Default -->
-              <!-- Panel Default -->
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="check-title">
-											<a data-toggle="collapse" data-parent="#accordion" href="#check3">
-                                                <span class="acc-icons"></span>Fully adoptable phone directory with rich features in it.
-											</a>
-										</h4>
-                </div>
-                <div id="check3" class="panel-collapse collapse ">
-                  <div class="panel-body">
-                    <p>
-                      Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <!-- End Panel Default -->
-              <!-- Panel Default -->
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="check-title">
-											<a data-toggle="collapse" data-parent="#accordion" href="#check4">
-                                                <span class="acc-icons"></span>Fully adoptable phone directory with rich features in it.
-											</a>
-										</h4>
-                </div>
-                <div id="check4" class="panel-collapse collapse">
-                  <div class="panel-body">
-                    <p>
-                      Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <!-- End Panel Default -->
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-12">
-          <div class="tab-menu">
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
-              <li class="active">
-                <a href="#p-view-1" role="tab" data-toggle="tab">Project</a>
-              </li>
-              <li>
-                <a href="#p-view-2" role="tab" data-toggle="tab">Planning</a>
-              </li>
-              <li>
-                <a href="#p-view-3" role="tab" data-toggle="tab">Success</a>
-              </li>
-            </ul>
-          </div>
-          <div class="tab-content">
-            <div class="tab-pane active" id="p-view-1">
-              <div class="tab-inner">
-                <div class="event-content head-team">
-                  <h4>Project</h4>
-                  <p>
-                    Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.
-                  </p>
-                  <p>
-                    Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane" id="p-view-2">
-              <div class="tab-inner">
-                <div class="event-content head-team">
-                  <h4>Planning</h4>
-                  <p>
-                    Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.
-                  </p>
-                  <p>
-                    Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane" id="p-view-3">
-              <div class="tab-inner">
-                <div class="event-content head-team">
-                  <h4>Success</h4>
-                  <p>
-                    Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.
-                  </p>
-                  <p>
-                    Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- end Row -->
-    </div>
-  </div>
-  <!-- End Faq Area -->
+<?php     
+  } 
+?>
+
+
+
+
+
+
 
   <!-- Start Wellcome Area -->
   <div class="wellcome-area">
@@ -450,488 +320,13 @@
   </div>
   <!-- End Wellcome Area -->
 
-  <!-- Start team Area -->
-  <div id="team" class="our-team-area area-padding">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="section-headline text-center">
-            <h2>Team of PhDir</h2>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="team-top">
-          <div class="col-md-3 col-sm-3 col-xs-12">
-            <div class="single-team-member">
-              <div class="team-img">
-                <a href="#">
-										<img src="img/team/1.jpg" alt="">
-									</a>
-                <div class="team-social-icon text-center">
-                  <ul>
-                    <li>
-                      <a href="#">
-													<i class="fa fa-facebook"></i>
-												</a>
-                    </li>
-                    <li>
-                      <a href="#">
-													<i class="fa fa-twitter"></i>
-												</a>
-                    </li>
-                    <li>
-                      <a href="#">
-													<i class="fa fa-instagram"></i>
-												</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="team-content text-center">
-                <h4>Jhon Doe</h4>
-                <p>Seo</p>
-              </div>
-            </div>
-          </div>
-          <!-- End column -->
-          <div class="col-md-3 col-sm-3 col-xs-12">
-            <div class="single-team-member">
-              <div class="team-img">
-                <a href="#">
-										<img src="img/team/2.jpg" alt="">
-									</a>
-                <div class="team-social-icon text-center">
-                  <ul>
-                    <li>
-                      <a href="#">
-													<i class="fa fa-facebook"></i>
-												</a>
-                    </li>
-                    <li>
-                      <a href="#">
-													<i class="fa fa-twitter"></i>
-												</a>
-                    </li>
-                    <li>
-                      <a href="#">
-													<i class="fa fa-instagram"></i>
-												</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="team-content text-center">
-                <h4>Male Mold</h4>
-                <p>Web Developer</p>
-              </div>
-            </div>
-          </div>
-          <!-- End column -->
-          <div class="col-md-3 col-sm-3 col-xs-12">
-            <div class="single-team-member">
-              <div class="team-img">
-                <a href="#">
-										<img src="img/team/3.jpg" alt="">
-									</a>
-                <div class="team-social-icon text-center">
-                  <ul>
-                    <li>
-                      <a href="#">
-													<i class="fa fa-facebook"></i>
-												</a>
-                    </li>
-                    <li>
-                      <a href="#">
-													<i class="fa fa-twitter"></i>
-												</a>
-                    </li>
-                    <li>
-                      <a href="#">
-													<i class="fa fa-instagram"></i>
-												</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="team-content text-center">
-                <h4>AXE</h4>
-                <p>Web Design</p>
-              </div>
-            </div>
-          </div>
-          <!-- End column -->
-          <div class="col-md-3 col-sm-3 col-xs-12">
-            <div class="single-team-member">
-              <div class="team-img">
-                <a href="#">
-										<img src="img/team/4.jpg" alt="">
-									</a>
-                <div class="team-social-icon text-center">
-                  <ul>
-                    <li>
-                      <a href="#">
-													<i class="fa fa-facebook"></i>
-												</a>
-                    </li>
-                    <li>
-                      <a href="#">
-													<i class="fa fa-twitter"></i>
-												</a>
-                    </li>
-                    <li>
-                      <a href="#">
-													<i class="fa fa-instagram"></i>
-												</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="team-content text-center">
-                <h4>JPJ</h4>
-                <p>Placed</p>
-              </div>
-            </div>
-          </div>
-          <!-- End column -->
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End Team Area -->
 
-  <!-- Start reviews Area -->
-  <div class="reviews-area hidden-xs">
-    <div class="work-us">
-      <div class="work-left-text">
-        <a href="#">
-						<img src="img/about/2.jpg" alt="">
-					</a>
-      </div>
-      <div class="work-right-text text-center">
-        <h2>Fully adoptable phone directory with rich features in it.</h2>
-        <h5>Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.</h5>
-        <a href="#contact" class="ready-btn">Contact us</a>
-      </div>
-    </div>
-  </div>
-  <!-- End reviews Area -->
 
-  <!-- Start portfolio Area -->
-  <div id="portfolio" class="portfolio-area area-padding fix">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <div class="section-headline text-center">
-            <h2>Our Portfolio</h2>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <!-- Start Portfolio -page -->
-        <div class="awesome-project-1 fix">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="awesome-menu ">
-              <ul class="project-menu">
-                <li>
-                  <a href="#" class="active" data-filter="*">All</a>
-                </li>
-                <li>
-                  <a href="#" data-filter=".development">Development</a>
-                </li>
-                <li>
-                  <a href="#" data-filter=".design">Design</a>
-                </li>
-                <li>
-                  <a href="#" data-filter=".photo">Photoshop</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="awesome-project-content">
-          <!-- single-awesome-project start -->
-          <div class="col-md-4 col-sm-4 col-xs-12 design development">
-            <div class="single-awesome-project">
-              <div class="awesome-img">
-                <a href="#"><img src="img/portfolio/1.jpg" alt="" /></a>
-                <div class="add-actions text-center">
-                  <div class="project-dec">
-                    <a class="venobox" data-gall="myGallery" href="img/portfolio/1.jpg">
-                      <h4>Business</h4>
-                      <span>Fully adoptable phone directory with rich features in it.</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- single-awesome-project end -->
-          <!-- single-awesome-project start -->
-          <div class="col-md-4 col-sm-4 col-xs-12 photo">
-            <div class="single-awesome-project">
-              <div class="awesome-img">
-                <a href="#"><img src="img/portfolio/2.jpg" alt="" /></a>
-                <div class="add-actions text-center">
-                  <div class="project-dec">
-                    <a class="venobox" data-gall="myGallery" href="img/portfolio/2.jpg">
-                      <h4>Blue Sea</h4>
-                      <span>Fully adoptable phone directory with rich features in it.</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- single-awesome-project end -->
-          <!-- single-awesome-project start -->
-          <div class="col-md-4 col-sm-4 col-xs-12 design">
-            <div class="single-awesome-project">
-              <div class="awesome-img">
-                <a href="#"><img src="img/portfolio/3.jpg" alt="" /></a>
-                <div class="add-actions text-center">
-                  <div class="project-dec">
-                    <a class="venobox" data-gall="myGallery" href="img/portfolio/3.jpg">
-                      <h4>Beautiful</h4>
-                      <span>Fully adoptable phone directory with rich features in it.</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- single-awesome-project end -->
-          <!-- single-awesome-project start -->
-          <div class="col-md-4 col-sm-4 col-xs-12 photo development">
-            <div class="single-awesome-project">
-              <div class="awesome-img">
-                <a href="#"><img src="img/portfolio/4.jpg" alt="" /></a>
-                <div class="add-actions text-center">
-                  <div class="project-dec">
-                    <a class="venobox" data-gall="myGallery" href="img/portfolio/4.jpg">
-                      <h4>Creative</h4>
-                      <span>Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- single-awesome-project end -->
-          <!-- single-awesome-project start -->
-          <div class="col-md-4 col-sm-4 col-xs-12 development">
-            <div class="single-awesome-project">
-              <div class="awesome-img">
-                <a href="#"><img src="img/portfolio/5.jpg" alt="" /></a>
-                <div class="add-actions text-center text-center">
-                  <div class="project-dec">
-                    <a class="venobox" data-gall="myGallery" href="img/portfolio/5.jpg">
-                      <h4>Beautiful</h4>
-                      <span>Fully adoptable phone directory with rich features in it.</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- single-awesome-project end -->
-          <!-- single-awesome-project start -->
-          <div class="col-md-4 col-sm-4 col-xs-12 design photo">
-            <div class="single-awesome-project">
-              <div class="awesome-img">
-                <a href="#"><img src="img/portfolio/6.jpg" alt="" /></a>
-                <div class="add-actions text-center">
-                  <div class="project-dec">
-                    <a class="venobox" data-gall="myGallery" href="img/portfolio/6.jpg">
-                      <h4>Night Hill</h4>
-                      <span>Fully adoptable phone directory with rich features in it.</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- single-awesome-project end -->
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- awesome-portfolio end -->
-  <!-- start pricing area -->
-  <div id="pricing" class="pricing-area area-padding">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="section-headline text-center">
-            <h2>Pricing Table</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End pricing table area -->
-  <!-- Start Testimonials -->
-  <div class="testimonials-area">
-    <div class="testi-inner area-padding">
-      <div class="testi-overly"></div>
-      <div class="container ">
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <!-- Start testimonials Start -->
-            <div class="testimonial-content text-center">
-              <a class="quate" href="#"><i class="fa fa-quote-right"></i></a>
-              <!-- start testimonial carousel -->
-              <div class="testimonial-carousel">
-                <div class="single-testi">
-                  <div class="testi-text">
-                    <p>
-                      Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.
-                    </p>
-                    <h6>Boby</h6>
-                  </div>
-                </div>
-                <!-- End single item -->
-                <div class="single-testi">
-                  <div class="testi-text">
-                    <p>
-                      Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.
-                    </p>
-                    <h6>Jhon</h6>
-                  </div>
-                </div>
-                <!-- End single item -->
-                <div class="single-testi">
-                  <div class="testi-text">
-                    <p>
-                     Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.
-                    </p>
-                    <h6>Fleming</h6>
-                  </div>
-                </div>
-                <!-- End single item -->
-              </div>
-            </div>
-            <!-- End testimonials end -->
-          </div>
-          <!-- End Right Feature -->
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End Testimonials -->
-  <!-- Start Blog Area -->
-  <div id="blog" class="blog-area">
-    <div class="blog-inner area-padding">
-      <div class="blog-overly"></div>
-      <div class="container ">
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="section-headline text-center">
-              <h2>Latest News</h2>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <!-- Start Left Blog -->
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="single-blog">
-              <div class="single-blog-img">
-                <a href="blog.html">
-										<img src="img/blog/1.jpg" alt="">
-									</a>
-              </div>
-              <div class="blog-meta">
-                <span class="comments-type">
-										<i class="fa fa-comment-o"></i>
-										<a href="#">13 comments</a>
-									</span>
-                <span class="date-type">
-										<i class="fa fa-calendar"></i>2016-03-05 / 09:10:16
-									</span>
-              </div>
-              <div class="blog-text">
-                <h4>
-                                        <a href="blog.html">Fully adoptable phone directory with rich features in it.</a>
-									</h4>
-                <p>
-                  Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.
-                </p>
-              </div>
-              <span>
-									<a href="blog.html" class="ready-btn">Read more</a>
-								</span>
-            </div>
-            <!-- Start single blog -->
-          </div>
-          <!-- End Left Blog-->
-          <!-- Start Left Blog -->
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="single-blog">
-              <div class="single-blog-img">
-                <a href="blog.html">
-										<img src="img/blog/2.jpg" alt="">
-									</a>
-              </div>
-              <div class="blog-meta">
-                <span class="comments-type">
-										<i class="fa fa-comment-o"></i>
-										<a href="#">130 comments</a>
-									</span>
-                <span class="date-type">
-										<i class="fa fa-calendar"></i>2016-03-05 / 09:10:16
-									</span>
-              </div>
-              <div class="blog-text">
-                <h4>
-                                        <a href="blog.html">Blog</a>
-									</h4>
-                <p>
-                  Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.
-                </p>
-              </div>
-              <span>
-									<a href="blog.html" class="ready-btn">Read more</a>
-								</span>
-            </div>
-            <!-- Start single blog -->
-          </div>
-          <!-- End Left Blog-->
-          <!-- Start Right Blog-->
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="single-blog">
-              <div class="single-blog-img">
-                <a href="blog.html">
-										<img src="img/blog/3.jpg" alt="">
-									</a>
-              </div>
-              <div class="blog-meta">
-                <span class="comments-type">
-										<i class="fa fa-comment-o"></i>
-										<a href="#">10 comments</a>
-									</span>
-                <span class="date-type">
-										<i class="fa fa-calendar"></i>2016-03-05 / 09:10:16
-									</span>
-              </div>
-              <div class="blog-text">
-                <h4>
-                  <a href="blog.html">Fully adoptable phone directory with rich features in it.</a>
-								</h4>
-                <p>
-                  Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.
-                </p>
-              </div>
-              <span>
-									<a href="blog.html" class="ready-btn">Read more</a>
-								</span>
-            </div>
-          </div>
-          <!-- End Right Blog-->
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End Blog -->
+
+
+
+
+
   <!-- Start Suscrive Area -->
   <div class="suscribe-area">
     <div class="container">
@@ -946,191 +341,14 @@
     </div>
   </div>
   <!-- End Suscrive Area -->
-  <!-- Start contact Area -->
-  <div id="contact" class="contact-area">
-    <div class="contact-inner area-padding">
-      <div class="contact-overly"></div>
-      <div class="container ">
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="section-headline text-center">
-              <h2>Contact us</h2>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <!-- Start contact icon column -->
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="contact-icon text-center">
-              <div class="single-icon">
-                <i class="fa fa-mobile"></i>
-                <p>
-                  Call: +1 1111 111111 11<br>
-                  <span>24/7/365</span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- Start contact icon column -->
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="contact-icon text-center">
-              <div class="single-icon">
-                <i class="fa fa-envelope-o"></i>
-                <p>
-                  Email: info@phdir.com<br>
-                  <span>Web: www.phdir.com</span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- Start contact icon column -->
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="contact-icon text-center">
-              <div class="single-icon">
-                <i class="fa fa-map-marker"></i>
-                <p>
-                  Location: XXXX Adam Street<br>
-                  <span>NY 535022, USA</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
 
-          <!-- Start Google Map -->
-          <div class="col-md-6 col-sm-6 col-xs-12">
-
-            <img src="https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x350&maptype=roadmap&markers=color:red%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyD8HeI8o-c1NppZA-92oYlXakhDPYR7XMY" alt="">
-
-          </div>
-          <!-- End Google Map -->
-
-          <!-- Start  contact -->
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="form contact-form">
-              <div id="sendmessage">Your message has been sent. Thank you!</div>
-              <div id="errormessage"></div>
-              <form action="" method="post" role="form" class="contactForm">
-                <div class="form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                  <div class="validation"></div>
-                </div>
-                <div class="form-group">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
-                  <div class="validation"></div>
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-                  <div class="validation"></div>
-                </div>
-                <div class="form-group">
-                  <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
-                  <div class="validation"></div>
-                </div>
-                <div class="text-center"><button type="submit">Send Message</button></div>
-              </form>
-            </div>
-          </div>
-          <!-- End Left contact -->
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End Contact Area -->
-
-  <!-- Start Footer bottom Area -->
-  <footer>
-    <div class="footer-area">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="footer-content">
-              <div class="footer-head">
-                <div class="footer-logo">
-                  <h2><span>PH</span>Dir</h2>
-                </div>
-
-                <p>Contact us on our other presense...</p>
-                <div class="footer-icons">
-                  <ul>
-                    <li>
-                      <a href="#"><i class="fa fa-facebook"></i></a>
-                    </li>
-                    <li>
-                      <a href="#"><i class="fa fa-twitter"></i></a>
-                    </li>
-                    <li>
-                      <a href="#"><i class="fa fa-google"></i></a>
-                    </li>
-                    <li>
-                      <a href="#"><i class="fa fa-pinterest"></i></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- end single footer -->
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="footer-content">
-              <div class="footer-head">
-                <h4>information</h4>
-                <p>
-                  Phone Directory contain lot of details you n your business need.
-                </p>
-                <div class="footer-contacts">
-                  <p><span>Tel:</span> +111 111 111 111 111</p>
-                  <p><span>Email:</span> phdir@directory.com</p>
-                  <p><span>Working Hours:</span> 24/7/365</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- end single footer -->
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="footer-content">
-              <div class="footer-head">
-                <h4>Instagram</h4>
-                <div class="flicker-img">
-                  <a href="#"><img src="img/portfolio/1.jpg" alt=""></a>
-                  <a href="#"><img src="img/portfolio/2.jpg" alt=""></a>
-                  <a href="#"><img src="img/portfolio/3.jpg" alt=""></a>
-                  <a href="#"><img src="img/portfolio/4.jpg" alt=""></a>
-                  <a href="#"><img src="img/portfolio/5.jpg" alt=""></a>
-                  <a href="#"><img src="img/portfolio/6.jpg" alt=""></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="footer-area-bottom">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="copyright text-center">
-              <p>
-                &copy; Copyright <strong>PHDir</strong>. All Rights Reserved
-              </p>
-            </div>
-            <div class="credits">
-              Designed by XYZ
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+<?php include('footer.php'); ?>
 
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-
   <!-- JavaScript Libraries -->
   <script src="lib/jquery/jquery.min.js"></script>
-<!-- /*  <script src="lib/bootstrap/js/bootstrap.min.js"></script>*/ -->
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- /*  <script src="lib/bootstrap/js/bootstrap.min.js"></script>*/ -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="lib/owlcarousel/owl.carousel.min.js"></script>
   <script src="lib/venobox/venobox.min.js"></script>
   <script src="lib/knob/jquery.knob.js"></script>
