@@ -2,7 +2,7 @@
 
 	$servername = "localhost";
 	$username = "root";
-	$password = "password";
+	$password = "";
 
 	try 
 	{
@@ -15,4 +15,5 @@
 		define('DB_AVAILABLE', 0);
 	    
 	}
+	include_once('functions.php');
 ?> 
