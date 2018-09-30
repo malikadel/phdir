@@ -1,8 +1,9 @@
 <?php 
-  session_start();
-  error_reporting(E_ALL);
-  error_reporting(-1);
-  ini_set('error_reporting', E_ALL);
+include_once('settings.php');
+
+  $phoneNumbers = array();
+  $privateNumbers = array();
+  publicPhones();
 ?>
 <!doctype html>
 <html lang="en">
@@ -50,13 +51,22 @@
 
   <!-- Responsive Stylesheet File -->
   <link href="css/responsive.css" rel="stylesheet">
+  <script>
 
+      var urlParams = new URLSearchParams(window.location.search);
+      if(urlParams.has('message'))
+      {
+        alert(urlParams.get('message'));      
+      }
+
+
+  </script>
 </head>
 <!-- data-spy="scroll" data-target="#navbar-example" -->
 <body data-spy="scroll" data-target="#navbar-example">
 <!-- Preloader are 1st step towards professional design. -->
 
-<?php include("header.php"); ?>
+<?php include_once("header.php"); ?>
 
   <!-- Start Slider Area -->
   <div id="home" class="slider-area">
@@ -79,7 +89,7 @@
                 </div>
                 <!-- layer 2 -->
                 <div class="layer-1-2 wow slideInUp" data-wow-duration="2s" data-wow-delay=".1s">
-                  <h1 class="title2">Fully adoptable phone directory with rich features in it.</h1>
+                  <h1 class="title2">Helping Businesses</h1>
                 </div>
                 <!-- layer 3 -->
                 <div class="layer-1-3 hidden-xs wow slideInUp" data-wow-duration="2s" data-wow-delay=".2s">
@@ -104,7 +114,7 @@
                 </div>
                 <!-- layer 2 -->
                 <div class="layer-1-2 wow slideInUp" data-wow-duration="2s" data-wow-delay=".1s">
-                  <h1 class="title2">Fully adoptable phone directory with rich features in it.</h1>
+                  <h1 class="title2">Helping Businesses</h1>
                 </div>
                 <!-- layer 3 -->
                 <div class="layer-1-3 hidden-xs wow slideInUp" data-wow-duration="2s" data-wow-delay=".2s">
@@ -129,7 +139,7 @@
                 </div>
                 <!-- layer 2 -->
                 <div class="layer-1-2 wow slideInUp" data-wow-duration="2s" data-wow-delay=".1s">
-                  <h1 class="title2">Helping Business Security  & Peace of Mind for Your Family</h1>
+                  <h1 class="title2">Helping Businesses</h1>
                 </div>
                 <!-- layer 3 -->
                 <div class="layer-1-3 hidden-xs wow slideInUp" data-wow-duration="2s" data-wow-delay=".2s">
@@ -145,7 +155,7 @@
   </div>
   <!-- End Slider Area -->
   <!-- Start Public Contact Area -->
-  <div id="contact" class="contact-area">
+  <div id="public-contacts" class="contact-area">
     <div class="contact-inner area-padding">
       <div class="contact-overly"></div>
       <div class="container ">
@@ -161,27 +171,35 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>Firstname</th>
-                  <th>Lastname</th>
+                  <th>Name</th>
+                  <th>Phone</th>
                   <th>Email</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>John</td>
-                  <td>Doe</td>
-                  <td>john@example.com</td>
-                </tr>
-                <tr>
-                  <td>Mary</td>
-                  <td>Moe</td>
-                  <td>mary@example.com</td>
-                </tr>
-                <tr>
-                  <td>July</td>
-                  <td>Dooley</td>
-                  <td>july@example.com</td>
-                </tr>
+
+                <?php 
+                if(count($phoneNumbers) > 0)
+                {
+                  foreach($phoneNumbers as $phoneNumber)
+                  { 
+                  ?>
+                  <tr>
+                    <td><?php echo $phoneNumber['name']; ?></td>
+                    <td><?php echo $phoneNumber['pnumber']; ?></td>
+                    <td><?php echo $phoneNumber['email']; ?></td>
+                  </tr>
+                <?php 
+                  }                   
+                }
+                else
+                { ?>
+                  <tr>
+                    <td colspan="3">No Public Phone Number is found in directory.</td>
+                  </tr>
+                <?php 
+                }
+                ?>
               </tbody>
             </table>
           </div>
@@ -189,14 +207,71 @@
       </div>
     </div>
   </div>
-  <!-- End Public Contact Area -->
-
-
-
 <?php
 
   if(isset($_SESSION['loggedIn']) and $_SESSION['loggedIn'] == true)
-  {}
+  {
+    $call = privatePhones();
+?>
+  <div id="private-directory" class="contact-area">
+    <div class="contact-inner area-padding">
+      <div class="contact-overly"></div>
+      <div class="container ">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="section-headline text-center">
+              <h2>Private Contacts</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Phone</th>
+                  <th>Email</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <?php 
+                if(count($privateNumbers) > 0)
+                {
+                  foreach($privateNumbers as $phoneNumber)
+                  { 
+                  ?>
+                  <tr>
+                    <td><?php echo $phoneNumber['name']; ?></td>
+                    <td><?php echo $phoneNumber['pnumber']; ?></td>
+                    <td><?php echo $phoneNumber['email']; ?></td>
+                    <td>
+                      <a href="editPhones.php?cid=<?php echo $phoneNumber['id'] ?>" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-edit"></i></a>
+                      <a href="deleteContact.php?cid=<?php echo $phoneNumber['id'] ?>" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></a>
+                    </td>
+                  </tr>
+                <?php 
+                  }                   
+                }
+                else
+                { ?>
+                  <tr>
+                    <td colspan="3">No Private Phone Number is found in your directory.</td>
+                  </tr>
+                <?php 
+                }
+                ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php 
+  }
   else
   {
 ?>
@@ -278,19 +353,9 @@
     </div>
   </div>
   <!-- End Signup area -->
-
-
-
 <?php     
   } 
 ?>
-
-
-
-
-
-
-
   <!-- Start Wellcome Area -->
   <div class="wellcome-area">
     <div class="well-bg">
@@ -300,7 +365,7 @@
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="wellcome-text">
               <div class="well-text text-center">
-                <h2>Fully adoptable phone directory with rich features in it.</h2>
+                <h2>Helping Businesses</h2>
                 <p>
                   Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.Fully adoptable phone directory with rich features in it.
                 </p>
@@ -342,7 +407,10 @@
   </div>
   <!-- End Suscrive Area -->
 
-<?php include('footer.php'); ?>
+<?php include_once('footer.php'); ?>
+
+
+
 
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
   <!-- JavaScript Libraries -->

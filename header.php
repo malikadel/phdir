@@ -1,4 +1,4 @@
-  <div id="preloader"></div>
+<!--   <div id="preloader"></div> -->
   <header>
     <!-- header-area start -->
     <div id="sticker" class="header-area">
@@ -27,31 +27,38 @@
               <div class="collapse navbar-collapse main-menu bs-example-navbar-collapse-1" id="navbar-example">
                 <ul class="nav navbar-nav navbar-right">
                   <li class="active">
-                    <a class="page-scroll" href="#home">Home</a>
+                    <a class="page-scroll" href="http://localhost/phdir">Home</a>
                   </li>
+                  <li >
+                    <a class="page-scroll" href="http://localhost/phdir#public-contacts">Public Directory</a>
+                  </li>
+                  
                   <?php
 
                     if(isset($_SESSION['loggedIn']) and $_SESSION['loggedIn'] == true)
-                    {
-                      $log = '<li>'
-                          . '<a class="page-scroll" href="addphones.php">Add Phones</a>'
-                          . '</li>'
-                          . '<li>'
-                          . '<a class="page-scroll" href="logout.php">Logout</a>'
-                          . '</li>';
+                    {?>
+                      <li>
+                      <a class="page-scroll" href="addphones.php">Add Phones</a>
+                      </li>
+                      <li>
+                      <a class="page-scroll" href="index.php#private-directory">Your Directory</a>
+                      </li>
+                      <li>
+                      <a class="page-scroll" href="logout.php">Logout</a>
+                      </li>
+                    <?php 
                     } 
                     else
                     {
-
-                      $log = '<li>'
-                          . '<a class="page-scroll" href="#about">Login</a>'
-                          . '</li>'
-                          . '<li>'
-                          . '<a class="page-scroll" href="#about">Sign Up</a>'
-                          . '</li>';
-
+                      ?>
+                      <li>
+                      <a class="page-scroll" href="#about">Login</a>
+                      </li>
+                      <li>
+                      <a class="page-scroll" href="#about">Sign Up</a>
+                      </li>
+                      <?php 
                     }
-                    echo $log;
                   ?>
                   <!-- <li>
                     <a class="page-scroll" href="#services">SignUp</a>

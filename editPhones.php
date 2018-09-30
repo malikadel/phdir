@@ -1,5 +1,5 @@
 <?php 
-  include_once("settings.php");
+  include_once('editContact.php');
 ?>
 <!doctype html>
 <html lang="en">
@@ -56,45 +56,46 @@
 <?php include_once("header.php"); ?>
 
 
-
+  <br/>
   <div id="services" class="services-area area-padding">
     <div class="container">
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="section-headline text-center">
-            <h2>Add Contact</h2>
+            <h2>Edit Contact and Phone</h2>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-          <form class="form-horizontal" action="addContact.php" method="post">
+          <form class="form-horizontal" action="processEditContact.php" method="post">
+            <input type="hidden" name="cid" value="<?php echo isset($contact['id'])? $contact['id']: 0; ?>" />
           <div class="form-group">
             <label class="control-label col-sm-2" for="name">Name:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="name" id="name" placeholder="Enter Name" required="required">
+              <input type="text" value="<?php echo isset($contact['name'])?$contact['name']:''; ?>" class="form-control" name="name" id="name" placeholder="Enter Name" required="required">
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="email">Email:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="email" id="email" placeholder="Enter Contact Email">
+              <input type="text" value="<?php echo isset($contact['email'])? $contact['email']: ''; ?>" class="form-control" name="email" id="email" placeholder="Enter Contact Email">
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="phone">Phone:</label>
             <div class="col-sm-8">
-              <input type="text"  class="form-control" name="phone" id="" placeholder="Enter Contact Phone">
+              <input type="text" value="<?php echo isset($contact['pnumber'])? $contact['pnumber']: ''; ?>"  class="form-control" name="pnumber" id="" placeholder="Enter Contact Phone">
             </div>
             <div class="col-sm-2">
               <div class="checkbox">
-                <label><input type="checkbox" name="pub" value="0">Make Public</label>
+                <label><input type="checkbox" name="pub" value="1"<?php echo (isset($contact['access']) and $contact['access'] == '0')? 'checked': ''; ?> >Make Public</label>
               </div>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" class="btn btn-primary" style="background-color:#3ec1d5; color:white;">Submit</button>
+              <button type="submit" class="btn btn-primary" style="background-color:#3ec1d5; color:white;">Update Contact</button>
             </div>
           </div>
           </form> 
@@ -131,7 +132,6 @@
   <script src="js/main.js"></script>
   <script>
     
-
 
 
   </script>

@@ -1,10 +1,5 @@
 <?php 
-session_start();	
-error_reporting(E_ALL);
-error_reporting(-1);
-ini_set('error_reporting', E_ALL);
-
-include("lib/database/connection.php");
+include_once("settings.php");
 
 if(isset($_SERVER['REQUEST_METHOD']) and strtoupper($_SERVER['REQUEST_METHOD']) == "POST")
 {
@@ -32,7 +27,7 @@ if(isset($_SERVER['REQUEST_METHOD']) and strtoupper($_SERVER['REQUEST_METHOD']) 
 				$ret  = $stmt->execute(array($email,$password));
 				if($ret == 1)
 				{
-					include('sessions.php');
+					include_once('sessions.php');
 					header("Location: http://localhost/phdir");
 				}
 				else

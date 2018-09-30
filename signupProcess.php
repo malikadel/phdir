@@ -1,15 +1,5 @@
 <?php 
-
-error_reporting(E_ALL);
-error_reporting(-1);
-ini_set('error_reporting', E_ALL);
-
-include("lib/database/connection.php");
-/*echo '<pre>';
-print_r($_POST);
-echo '</pre>';*/
-
-
+include_once("settings.php");
 if(isset($_SERVER['REQUEST_METHOD']) and strtoupper($_SERVER['REQUEST_METHOD']) == "POST")
 {
 	if(DB_AVAILABLE == 1 and isset($PDOC))
@@ -37,7 +27,7 @@ if(isset($_SERVER['REQUEST_METHOD']) and strtoupper($_SERVER['REQUEST_METHOD']) 
 				}
 
 				$stmt->execute(array($name,$email,$password));
-				include('sessions.php');
+				include_once('sessions.php');
 				header("Location: http://localhost/phdir");
 
 		    }
