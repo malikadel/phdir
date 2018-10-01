@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 27, 2018 at 04:16 PM
+-- Generation Time: Oct 01, 2018 at 11:39 AM
 -- Server version: 5.5.58-0ubuntu0.14.04.1
 -- PHP Version: 7.1.15-1+ubuntu14.04.1+deb.sury.org+2
 
@@ -31,7 +31,17 @@ CREATE TABLE IF NOT EXISTS `contacts` (
   `name` varchar(300) NOT NULL,
   `email` varchar(300) NOT NULL,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `contacts`
+--
+
+INSERT INTO `contacts` (`id`, `name`, `email`, `user_id`) VALUES
+(2, 'Ali', 'ali@gmail.com', 1),
+(3, 'Sufian', 'sufi@gmail.com', 1),
+(4, 'Na,me', 'a@b.com', 2),
+(5, 'sdafsdf', 'naveed.ullcfs@tvcv.com', 2);
 
 -- --------------------------------------------------------
 
@@ -41,10 +51,20 @@ CREATE TABLE IF NOT EXISTS `contacts` (
 
 CREATE TABLE IF NOT EXISTS `phones` (
 `id` int(11) NOT NULL,
-  `number` varchar(50) NOT NULL,
+  `pnumber` varchar(50) NOT NULL,
   `contact_id` int(11) NOT NULL,
   `access` enum('0','1') NOT NULL COMMENT '0 = public, 1 = private'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `phones`
+--
+
+INSERT INTO `phones` (`id`, `pnumber`, `contact_id`, `access`) VALUES
+(1, '123-789456-456', 2, '1'),
+(2, '5465435', 3, '1'),
+(3, '111-111-345', 4, '1'),
+(4, '6082562129', 5, '1');
 
 -- --------------------------------------------------------
 
@@ -57,7 +77,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(1000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
+(1, 'Adeel Admin', 'adeel@gamil.com', 'd926d7bb9ccf46fc04a61bd65d87b9b3'),
+(2, 'Umair', 'umair@gamil.com', '202cb962ac59075b964b07152d234b70');
 
 --
 -- Indexes for dumped tables
@@ -89,17 +117,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `phones`
 --
 ALTER TABLE `phones`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --
