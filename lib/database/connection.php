@@ -2,7 +2,7 @@
 
 	$servername = "localhost";
 	$username = "root";
-	$password = "";
+	$password = "password";
 
 	try 
 	{
@@ -13,6 +13,7 @@
 	catch(PDOException $e)
 	{
 		define('DB_AVAILABLE', 0);
+		echo 'Something went wrong';exit;
 	    
 	}
 	include_once('functions.php');

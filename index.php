@@ -317,7 +317,7 @@ include_once('settings.php');
   <!-- End Login area -->
 
   <!-- Start Signup area -->
-  <div id="services" class="services-area area-padding">
+  <div id="signupbody" class="services-area area-padding">
     <div class="container">
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">

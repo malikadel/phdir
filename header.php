@@ -55,7 +55,7 @@
                       <a class="page-scroll" href="#about">Login</a>
                       </li>
                       <li>
-                      <a class="page-scroll" href="#about">Sign Up</a>
+                      <a class="page-scroll" href="#signupbody">Sign Up</a>
                       </li>
                       <?php 
                     }
